@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>গ্রাহক_সেবা</title>
+    <!-- Include Tailwind CSS and DaisyUI -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.23/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            plugins: [daisyui],
+            daisyui: {
+                themes: [{
+                    lineHeight: {
+                        '1.3': '1.3',
+                    },
+                    mytheme: {
+                        primary: "#f97316", // Orange
+                        // secondary: "#f3f3f3", // Blue
+                        // neutral: "#3d4451",
+                        // "base-100": "#ffffff",
+                    },
+                }, ],
+            },
+        };
+    </script>
+
+
+</head>
+
+<body>
+    <!-- Loader -->
+    <!-- <div id="loader" class="fixed inset-0 flex items-center justify-center bg-white z-50"><div class="relative w-20 h-20"><div class="absolute top-2.5 left-2.5 w-20 h-20 rounded-full shadow-md animate-spin border-t-4 border-orange-500"></div></div></div>-->
+    <!-- Announcement Bar -->
+    <div class="bg-orange-500 py-[14px]">
+        <p class="text-center text-white text-lg md:text-[22px]">আমাদের যে কোন পণ্য অর্ডার করতে কল বা WhatsApp করুন: <a href="tel:+8801321208940" class="underline hover:text-blue-600 ml-1"><i class="fas fa-phone"></i>+8801321208940 </a>|
+            <a href="tel:09642-922922" class="underline hover:text-blue-600 ml-2"><i class="fas fa-phone-alt"></i>হট লাইন: 09642-922922 </a>
+        </p>
+    </div>
+    <!-- Header -->
+    <header class="bg-white">
+        <div class="hidden lg:block container mx-auto relative px-7 py-4">
+            <div class="flex items-center">
+                <!-- Search Button -->
+                <div class="relative w-1/5 flex items-center">
+                    <!-- Search Button -->
+                    <button id="search-drawer-btn" class="flex items-center py-2 px-3 group relative">
+                        <svg
+                            class="w-5 h-5 text-orange-500 transition-colors"
+                            fill="currentColor"
+                            stroke="currentColor"
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 512 512"
+                        >
+                            <path
+                                d="M508.5 468.9L387.1 347.5c-2.3-2.3-5.3-3.5-8.5-3.5h-13.2c31.5-36.5 50.6-84 50.6-136C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c52 0 99.5-19.1 136-50.6v13.2c0 3.2 1.3 6.2 3.5 8.5l121.4 121.4c4.7 4.7 12.3 4.7 17 0l22.6-22.6c4.7-4.7 4.7-12.3 0-17zM208 368c-88.4 0-160-71.6-160-160S119.6 48 208 48s160 71.6 160 160-71.6 160-160 160z"
+                            ></path>
+                        </svg>
+                        <div
+                            class="absolute z-50 left-1/2 -translate-x-1/2 top-full mt-1 bg-orange-500 text-white text-[16px] rounded px-3 py-2 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap"
+                        >
+                            Search
+                        </div>
+                    </button>
+
+                    <!-- Overlay -->
+                    <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 hidden z-40 transition-opacity"></div>
+
+                    <!-- Top Drawer -->
+                    <div id="search-drawer" class="fixed inset-x-0 top-0 z-50 bg-white shadow-md p-4 transform -translate-y-full transition-transform duration-300">
+                        <div class="flex justify-between items-center">
+                            <h3 class="text-lg font-bold text-gray-800">Search</h3>
+                            <button id="close-drawer-btn" class="text-gray-600 hover:text-gray-800">
+                                Close
+                            </button>
+                        </div>
+                        <div class="mt-4">
+                            <input type="text" placeholder="Search..." class="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:border-orange-500" />
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+                <script>
+                    // Toggle Drawer Visibility
+                    const searchDrawerBtn = document.getElementById("search-drawer-btn");
+                    const searchDrawer = document.getElementById("search-drawer");
+                    const closeDrawerBtn = document.getElementById("close-drawer-btn");
+
+                    searchDrawerBtn.addEventListener("click", () => {
+                        searchDrawer.classList.toggle("translate-y-full");
+                    });
+
+                    closeDrawerBtn.addEventListener("click", () => {
+                        searchDrawer.classList.add("translate-y-full");
+                    });
+                </script>
+
+                <!-- Logo -->
+                <h1 class="w-3/5 flex justify-center">
+                    <a href="/" class="block"><img class="h-12 md:h-16 object-contain transition-transform duration-300 hover:scale-105" src="https://ghorerbazar.com/cdn/shop/files/logo.webp?v=1707766182" alt="Ghorer Bazar" /></a>
+                </h1>
+                <!-- Cart Button -->
+                <div class="w-1/5 flex justify-end items-center">
+                    <a href="/cart" class="relative py-2 px-2 flex items-center text-orange-500  group" id="m-cart-icon-bubble" role="button" aria-haspopup="dialog">
+                        <!-- Cart Icon --><svg class="w-5 h-5" fill="currentColor" stroke="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M352 128C352 57.42 294.579 0 224 0 153.42 0 96 57.42 96 128H0v304c0 44.183 35.817 80 80 80h288c44.183 0 80-35.817 80-80V128h-96zM224 48c44.112 0 80 35.888 80 80H144c0-44.112 35.888-80 80-80zm176 384c0 17.645-14.355 32-32 32H80c-17.645 0-32-14.355-32-32V176h48v40c0 13.255 10.745 24 24 24s24-10.745 24-24v-40h160v40c0 13.255 10.745 24 24 24s24-10.745 24-24v-40h48v256z"></path></svg>
+                        <!-- Tooltip -->
+                        <div class="absolute left-1/2 -translate-x-1/2 top-full mt-1 bg-orange-500 text-white text-[16px] rounded px-3 py-2 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">Cart </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Header -->
+        <div class="lg:hidden flex items-center justify-between px-4 py-3 ">
+            <!-- Menu Button --><button id="mobile-menu-button" class="text-gray-500"><svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" /></svg></button>
+            <!-- Logo -->
+            <a href="/" class=" flex-shrink-0 "><img class="h-8" src="https://ghorerbazar.com/cdn/shop/files/logo.webp?v=1707766182&width=500" alt="Ghorer Bazar"></a>
+            <!-- Cart Icon --><a href="/cart" class="relative text-gray-500"><svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l1.38-4.66A1 1 0 0017.5 7H6.56L5.28 3M7 13l-2 9m10-9l2 9m-6 0a1 1 0 102 0m-6 0a1 1 0 102 0" /></svg><span class="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">0</span></div><!-- Desktop Header --><div div class="hidden lg:flex items-center justify-between lg:justify-center  px-8 py-6 bg-[#f3f3f3]"><a href="/" class="hidden flex-shrink-0 "><img class="h-10" src="https://ghorerbazar.com/cdn/shop/files/logo.webp?v=1707766182&width=500" alt="Ghorer Bazar"></a>
+            <!-- Navigation -->
+            <nav class="flex space-x-20 bg-red"><a href="/collections/all" class="text-black text-[20px] font-medium relative group">All Categories <span class="absolute left-0 -bottom-1 w-0 h-[1.5px] bg-black transition-all duration-300 group-hover:w-full"></span></a><a href="/collections/offer"
+                    class="text-black text-[20px] font-medium  relative group">OFFER <span class="absolute left-0 -bottom-1 w-0 h-[1.5px] bg-black transition-all duration-300 group-hover:w-full"></span></a><a href="/collections/local-maghi-sarisha-oil" class="text-black text-[20px] font-medium relative group">Sarisha Oil <span class="absolute left-0 -bottom-1 w-0 h-[1.5px] bg-black transition-all duration-300 group-hover:w-full"></span></a>
+                <a href="/collections/ghee" class="text-black text-[20px] font-medium relative group">Ghee (ঘি) <span class="absolute left-0 -bottom-1 w-0 h-[1.5px] bg-black transition-all duration-300 group-hover:w-full"></span></a>
+                <a href="/collections/dates" class="text-black text-[20px] font-medium relative group">Dates (খেজুর) <span class="absolute left-0 -bottom-1 w-0 h-[1.5px] bg-black transition-all duration-300 group-hover:w-full"></span></a><a href="/collections/honey"
+                    class="text-black text-[20px] font-medium relative group">Honey <span class="absolute left-0 -bottom-1 w-0 h-[1.5px] bg-black transition-all duration-300 group-hover:w-full"></span></a>
+                <a href="/collections/masala" class="text-black text-[20px] font-medium relative group">Masala <span class="absolute left-0 -bottom-1 w-0 h-[1.5px] bg-black transition-all duration-300 group-hover:w-full"></span></a><a href="/collections/organic-oil"
+                    class="text-black text-[20px] font-medium relative group">Organic Oil <span class="absolute left-0 -bottom-1 w-0 h-[1.5px] bg-black transition-all duration-300 group-hover:w-full"></span></a>
+                <a href="/collections/nuts-amp-seeds" class="text-black text-[20px] font-medium relative group">Nuts & Seeds <span class="absolute left-0 -bottom-1 w-0 h-[1.5px] bg-black transition-all duration-300 group-hover:w-full"></span></a>
+                <a href="/collections/tea-coffee" class="text-black text-[20px] font-medium relative group">Tea/Coffee <span class="absolute left-0 -bottom-1 w-0 h-[1.5px] bg-black transition-all duration-300 group-hover:w-full"></span></a>
+                <a href="/collections/functional-food" class="text-black text-[20px] font-medium relative group">Functional Food <span class="absolute left-0 -bottom-1 w-0 h-[1.5px] bg-black transition-all duration-300 group-hover:w-full"></span></a>
+            </nav>
+            <!-- Cart Icon --><a href="/cart" class="hidden relative text-gray-500"><svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l1.38-4.66A1 1 0 0017.5 7H6.56L5.28 3M7 13l-2 9m10-9l2 9m-6 0a1 1 0 102 0m-6 0a1 1 0 102 0" /></svg><span class="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">0</span></a></div>
+    </header>
+
+
+
+    <main role="main" id="MainContent" class="">
+        <!-- Page Header -->
+        <div class="bg-[#fe8838] border-b py-[30px] lg:py-[45px]">
+          <div class="container mx-auto px-4 flex justify-center flex-col gap-2 lg:gap-4">
+            <h1 class="text-[2rem] md:text-[4rem] font-normal text-center text-white">Customer Care</h1>
+            <div class="flex justify-center items-center mt-4">
+              <nav
+                class=" flex items-center text-gray-600 text-sm space-x-3"
+                role="navigation"
+                aria-label="breadcrumbs"
+              >
+                <a href="/" class="text-white text-[16px] lg:text-[20px] hover:text-gray-400">Home</a>
+                <span>
+                  <svg
+                    class="w-4 h-4 text-white"
+                    fill="currentColor"
+                    stroke="currentColor"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 256 512"
+                  >
+                    <path
+                      d="M17.525 36.465l-7.071 7.07c-4.686 4.686-4.686 12.284 0 16.971L205.947 256 10.454 451.494c-4.686 4.686-4.686 12.284 0 16.971l7.071 7.07c4.686 4.686 12.284 4.686 16.97 0l211.051-211.05c4.686-4.686 4.686-12.284 0-16.971L34.495 36.465c-4.686-4.687-12.284-4.687-16.97 0z"
+                    ></path>
+                  </svg>
+                </span>
+                <span class="text-white text-[16px] lg:text-[20px]">Customer Care</span>
+              </nav>
+            </div>
+          </div>
+        </div>
+      
+        <!-- Refund Policy Content -->
+        <div class="lg:container mx-auto  px-4 lg:px-8">
+          <div class=" ">
+            <h1 class="text-center text-2xl lg:text-[50px] mt-2 mb-8 font-semibold">
+                Frequently Asked Questions
+            </h1>
+          </div>
+        </div>
+
+
+        <div class="container mx-auto py-10 px-4 lg:px-[250px] space-y-6">
+            <!-- First Collapsible Section -->
+            <div class="">
+              <button
+                class="w-full flex justify-between items-center py-4 text-2xl border-b-2 border-orange-500 font-normal text-black focus:outline-none focus:border-black text-left peer-checked:border-orange-500 peer-checked:text-orange-600"
+                data-collapse-btn="section-1"
+              >
+                <span class=" ">অর্ডার পেতে আমার কতক্ষন সময় লাগবে ?</span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="w-5 h-5 text-orange-500 transition-transform transform"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M19 9l-7 7-7-7"
+                  />
+                </svg>
+              </button>
+              <div id="section-1" class="hidden">
+                <p class="py-4 text-xl text-gray-600">সাধারণত আমরা প্রি-অর্ডার ব্যাতীত ৩ থেকে ৫ দিনের মধ্যে পণ্য সরবাহরহ করি এবং কখনো কোনো অনাকাঙ্ক্ষিত পরিস্থিতি তৈরি হলে আমরা ফোনে গ্রাহকের সাথে যোগাযোগ করে ডেলিভারি এর সময় সম্পর্কে অবগত করি।</p>
+              </div>
+            </div>
+          
+            <!-- Second Collapsible Section -->
+            <div class="">
+              <button
+                class="w-full flex justify-between items-center py-4 text-2xl border-b-2 border-orange-500 font-normal text-black focus:outline-none focus:border-black text-left peer-checked:border-orange-500 peer-checked:text-orange-600"
+                data-collapse-btn="section-2"
+              >
+                <span>ডেলিভারি চার্জ</span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="w-5 h-5 text-orange-500 transition-transform transform"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M19 9l-7 7-7-7"
+                  />
+                </svg>
+              </button>
+              <div id="section-2" class="hidden">
+                <p class="py-4 text-xl text-gray-600">সাধারণত আমরা প্রি-অর্ডার ব্যাতীত ৩ থেকে ৫ দিনের মধ্যে পণ্য সরবাহরহ করি এবং কখনো কোনো অনাকাঙ্ক্ষিত পরিস্থিতি তৈরি হলে আমরা ফোনে গ্রাহকের সাথে যোগাযোগ করে ডেলিভারি এর সময় সম্পর্কে অবগত করি।</p>
+              </div>
+            </div>
+          
+            <!-- Third Collapsible Section -->
+            <div class="">
+              <button
+                class="w-full flex justify-between items-center py-4 text-2xl border-b-2 border-orange-500 font-normal text-black focus:outline-none focus:border-black text-left peer-checked:border-orange-500 peer-checked:text-orange-600"
+                data-collapse-btn="section-3"
+              >
+                <span>গ্রাহক সেবা</span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="w-5 h-5 text-orange-500 transition-transform transform"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M19 9l-7 7-7-7"
+                  />
+                </svg>
+              </button>
+              <div id="section-3" class="hidden">
+                <p class="py-4 text-xl text-gray-600">সাধারণত আমরা প্রি-অর্ডার ব্যাতীত ৩ থেকে ৫ দিনের মধ্যে পণ্য সরবাহরহ করি এবং কখনো কোনো অনাকাঙ্ক্ষিত পরিস্থিতি তৈরি হলে আমরা ফোনে গ্রাহকের সাথে যোগাযোগ করে ডেলিভারি এর সময় সম্পর্কে অবগত করি।</p>
+              </div>
+            </div>
+          </div>
+          
+          
+          
+          
+        
+
+      </main>
+<script>
+ // Get all buttons and content sections
+const buttons = document.querySelectorAll("[data-collapse-btn]");
+const contents = document.querySelectorAll("[id^='section-']");
+
+buttons.forEach((button) => {
+  button.addEventListener("click", () => {
+    const targetId = button.getAttribute("data-collapse-btn");
+    const targetContent = document.getElementById(targetId);
+    const targetIcon = button.querySelector("svg");
+
+    // Close all other sections
+    contents.forEach((content) => {
+      if (content.id !== targetId) {
+        content.classList.add("hidden");
+      }
+    });
+
+    buttons.forEach((btn) => {
+      const icon = btn.querySelector("svg");
+      if (btn !== button) {
+        icon.classList.remove("rotate-180");
+      }
+    });
+
+    // Toggle the current section
+    targetContent.classList.toggle("hidden");
+    targetIcon.classList.toggle("rotate-180");
+  });
+});
+
+</script>
+
+
+
+
+<footer class=" text-gray-800 pt-8 mt-[40px] lg:mt-[100px]">
+    <div>
+        <!-- Footer Top -->
+        <div class="">
+            <div class=" flex flex-wrap lg:flex-nowrap justify-between items-start md:gap-8 px-4 ">
+                <!-- Logo and Description -->
+                <div class="w-full xl:w-5/12 space-y-4 text-center lg:text-left"><img src="https://ghorerbazar.com/cdn/shop/files/logo.webp?v=1707766182&width=165" alt="Logo" class="w-[110px] lg:w-40  h-auto ">
+                    <h1 class="font-bold text-xl lg:text-2xl  text-left">Ghorer Bazar: Your Trusted Source for Safe & Organic Food </h1>
+                    <p class="text-sm lg:text-[20px] font-[400]  text-justify lg:text-left " style="line-height: 1.3;">Ghorer Bazar is a leading e-commerce platform committed to delivering safe, healthy, and organic food products across Bangladesh. Renowned for its dedication to quality, Ghorer Bazar offers a diverse range of health-focused items,
+                        including premium mustard oil, pure ghee, organic honey, dates, chia seeds, and an assortment of nuts. Each product is carefully sourced and crafted to ensure maximum health benefits, meeting the highest standards of purity
+                        and freshness. </p>
+                </div>
+                <!-- Company Links -->
+                <div class="w-full xl:w-1/4  ">
+                    <!-- Company Section -->
+                    <h3 class="text-xl font-bold mb-8 text-orange-500 hidden lg:block">COMPANY</h3>
+                    <ul class="space-y-2 text-[23px] hidden lg:block">
+                        <li class="group relative"><a href="pages/about-us.html" class="hover:text-orange-500 font-normal relative inline-block">About Us <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-orange-500 transition-all duration-300 group-hover:w-full"></span></a></li>
+                        <li class="relative group"><a href="pages/refund-and-returns-policy.html" class="hover:text-orange-500 font-normal relative inline-block">রিটার্ন পলিসি <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-orange-500 transition-all duration-300 group-hover:w-full"></span></a></li>
+                        <li class="relative group"><a href="pages/রিফান্ড-প্রদান.html" class="hover:text-orange-500 font-normal relative inline-block">রিফান্ড পলিসি <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-orange-500 transition-all duration-300 group-hover:w-full"></span></a></li>
+                    </ul>
+                    <!-- Collapsible Section -->
+                    <div class="collapse collapse-arrow lg:hidden"><input type="checkbox" class="peer text-left" />
+                        <div class="collapse-title text-xl font-medium text-orange-500 text-left">COMPANY </div>
+                        <div class="collapse-content peer-checked:block hidden">
+                            <ul class="space-y-2 text-[20px] -mt-[10px]">
+                                <li class="group relative"><a href="pages/about-us.html" class="hover:text-orange-500 font-normal relative inline-block">About Us <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-orange-500 transition-all duration-300 group-hover:w-full"></span></a></li>
+                                <li class="relative group"><a href="pages/refund-and-returns-policy.html" class="hover:text-orange-500 font-normal relative inline-block">রিটার্ন পলিসি <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-orange-500 transition-all duration-300 group-hover:w-full"></span></a></li>
+                                <li class="relative group"><a href="pages/রিফান্ড-প্রদান.html" class="hover:text-orange-500 font-normal relative inline-block">রিফান্ড পলিসি <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-orange-500 transition-all duration-300 group-hover:w-full"></span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <style>
+                        .collapse-title {
+                            padding: 0 !important;
+                        }
+                        
+                        .collapse-arrow>.collapse-title:after {
+                            top: 15px;
+                        }
+                        
+                        .collapse:not(.collapse-close)>input[type=checkbox]:checked~.collapse-content {
+                            padding: 0!important;
+                        }
+                        
+                        .collapse:not(.collapse-open):not(.collapse-close)>.collapse-title {
+                            margin-top: 20px !important;
+                        }
+                    </style>
+                </div>
+                <!-- Quick Help -->
+                <div class="w-full xl:w-1/6">
+                    <h3 class="text-xl font-bold mb-8 text-orange-500 hidden lg:block">QUICK HELP</h3>
+                    <ul class="space-y-2 text-[23px] hidden lg:block">
+                        <li class="relative group"><a href="pages/customer-care.html" class="hover:text-orange-500 font-normal relative inline-block">গ্রাহক সেবা <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-orange-500 transition-all duration-300 group-hover:w-full"></span></a></li>
+                        <li class="relative group"><a href="pages/contact.html" class="hover:text-orange-500 font-normal relative inline-block">Contact <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-orange-500 transition-all duration-300 group-hover:w-full"></span></a></li>
+                    </ul>
+
+
+                    <div class="collapse collapse-arrow lg:hidden">
+                        <input type="checkbox" class="peer text-left" />
+                        <div class="collapse-title text-xl font-medium text-orange-500 text-left">
+                            QUICK HELP
+                        </div>
+                        <div class="collapse-content peer-checked:block hidden">
+                            <ul class="space-y-2 text-[20px] mb-[20px] -mt-[10px]">
+                                <li class="group relative">
+                                    <a href="pages/about-us.html" class="hover:text-orange-500 font-normal relative inline-block">
+                                About Us
+                                <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-orange-500 transition-all duration-300 group-hover:w-full"></span>
+                              </a>
+                                </li>
+                                <li class="relative group">
+                                    <a href="pages/refund-and-returns-policy.html" class="hover:text-orange-500 font-normal relative inline-block">
+                                রিটার্ন পলিসি
+                                <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-orange-500 transition-all duration-300 group-hover:w-full"></span>
+                              </a>
+                                </li>
+                                <li class="relative group">
+                                    <a href="pages/রিফান্ড-প্রদান.html" class="hover:text-orange-500 font-normal relative inline-block">
+                                রিফান্ড পলিসি
+                                <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-orange-500 transition-all duration-300 group-hover:w-full"></span>
+                              </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- Additional Information -->
+                <div class="w-full xl:w-1/4">
+                    <h3 class="text-xl font-bold  ">DBID ID: 437361334</h3>
+                </div>
+            </div>
+        </div>
+        <!-- Footer Bottom -->
+        <div class="mt-8 flex flex-col md:flex-row items-center justify-between
+        py-7 bg-orange-500">
+            <!-- Social Media Links -->
+            <div class="flex  space-x-4"><a href="https://www.facebook.com/Ghorerbazarbd.comm" target="_blank" class="text-black font-[20px]"><svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path fill="currentColor" d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z" /></svg></a></div>
+            <!-- Center Text -->
+            <p class="text-xl text-center text-white mt-4 md:mt-0">© ঘরের বাজার 2024</p>
+        </div>
+    </div>
+
+</footer>
+<br class="md:hidden" /><br class="md:hidden" />
+<div class="flex justify-between items-center bg-white py-4 px-6  fixed bottom-0 w-full z-50 md:hidden">
+    <!-- Home Icon -->
+    <div>
+        <a href="index.html" class="flex justify-center">
+            <svg class="w-8 h-8 text-gray-800" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 22 17">
+          <path
+            fill="currentColor"
+            d="M20.9141 7.93359c.1406.11719.2109.26953.2109.45703 0 .14063-.0469.25782-.1406.35157l-.3516.42187c-.1172.14063-.2578.21094-.4219.21094-.1406 0-.2578-.04688-.3515-.14062l-.9844-.77344V15c0 .3047-.1172.5625-.3516.7734-.2109.2344-.4687.3516-.7734.3516h-4.5c-.3047 0-.5742-.1172-.8086-.3516-.2109-.2109-.3164-.4687-.3164-.7734v-3.6562h-2.25V15c0 .3047-.11719.5625-.35156.7734-.21094.2344-.46875.3516-.77344.3516h-4.5c-.30469 0-.57422-.1172-.80859-.3516-.21094-.2109-.31641-.4687-.31641-.7734V8.46094l-.94922.77344c-.11719.09374-.24609.14062-.38672.14062-.16406 0-.30468-.07031-.42187-.21094l-.35157-.42187C.921875 8.625.875 8.50781.875 8.39062c0-.1875.070312-.33984.21094-.45703L9.73438.832031C10.1094.527344 10.5312.375 11 .375s.8906.152344 1.2656.457031l8.6485 7.101559zm-3.7266 6.50391V7.05469L11 1.99219l-6.1875 5.0625v7.38281h3.375v-3.6563c0-.3046.10547-.5624.31641-.7734.23437-.23436.5039-.35155.80859-.35155h3.375c.3047 0 .5625.11719.7734.35155.2344.211.3516.4688.3516.7734v3.6563h3.375z">
+          </path>
+        </svg>
+        </a>
+    </div>
+
+    <!-- All Products Icon -->
+    <div>
+        <a href="collections/all.html" class="flex justify-center">
+            <svg class="w-6 h-6 text-gray-800" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+          <path
+            d="M416 32H32A32 32 0 0 0 0 64v384a32 32 0 0 0 32 32h384a32 32 0 0 0 32-32V64a32 32 0 0 0-32-32zm-16 48v152H248V80zm-200 0v152H48V80zM48 432V280h152v152zm200 0V280h152v152z">
+          </path>
+        </svg>
+        </a>
+    </div>
+
+    <!-- Cart Icon -->
+    <div class="relative">
+        <a href="cart.html" class="flex justify-center">
+            <svg class="w-6 h-6 text-gray-800" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+          <path
+            d="M352 128C352 57.42 294.579 0 224 0 153.42 0 96 57.42 96 128H0v304c0 44.183 35.817 80 80 80h288c44.183 0 80-35.817 80-80V128h-96zM224 48c44.112 0 80 35.888 80 80H144c0-44.112 35.888-80 80-80zm176 384c0 17.645-14.355 32-32 32H80c-17.645 0-32-14.355-32-32V176h48v40c0 13.255 10.745 24 24 24s24-10.745 24-24v-40h160v40c0 13.255 10.745 24 24 24s24-10.745 24-24v-40h48v256z">
+          </path>
+        </svg>
+            <span class="absolute -top-1 -right-2 bg-orange-500 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">0</span>
+        </a>
+    </div>
+
+    <!-- Search Icon -->
+    <div>
+        <button class="flex justify-center">
+        <svg class="w-6 h-6 text-gray-800" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+          <path
+            d="M508.5 468.9L387.1 347.5c-2.3-2.3-5.3-3.5-8.5-3.5h-13.2c31.5-36.5 50.6-84 50.6-136C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c52 0 99.5-19.1 136-50.6v13.2c0 3.2 1.3 6.2 3.5 8.5l121.4 121.4c4.7 4.7 12.3 4.7 17 0l22.6-22.6c4.7-4.7 4.7-12.3 0-17zM208 368c-88.4 0-160-71.6-160-160S119.6 48 208 48s160 71.6 160 160-71.6 160-160 160z">
+          </path>
+        </svg>
+      </button>
+    </div>
+</div>
+<!-- Scroll-to-Top Button --><button id="scroll-to-top-button" class="fixed bottom-[5.5rem] right-4 w-12 h-12 bg-orange-500 text-white rounded-full hidden transition-opacity hover:bg-blue-600 z-[1000000000]"><svg class="w-6 h-6 mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" /></svg></button>
+
+<!-- Scripts -->
+<script>
+    // Scroll-to-top button logic
+    const scrollButton = document.getElementById('scroll-to-top-button');
+    window.addEventListener('scroll', () => {
+            if (window.scrollY > 200) {
+                scrollButton.classList.remove('hidden');
+            } else {
+                scrollButton.classList.add('hidden');
+            }
+        }
+
+    );
+    scrollButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+    );
+
+
+
+    // Simulated loader logic
+    window.addEventListener("load", () => {
+            setTimeout(() => {
+                const loader = document.getElementById("loader");
+                loader.classList.add("hidden");
+            }, 2000); // 2-second delay for loader
+        }
+
+    );
+</script>
+</body>
+
+</html>

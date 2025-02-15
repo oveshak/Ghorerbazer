@@ -1,0 +1,1102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fixed Tailwind + DaisyUI</title>
+    <!-- Include Tailwind CSS and DaisyUI -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.23/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            plugins: [daisyui],
+            daisyui: {
+                themes: [{
+                    lineHeight: {
+                        '1.3': '1.3',
+                    },
+                    mytheme: {
+                        primary: "#f97316", // Orange
+                        // secondary: "#f3f3f3", // Blue
+                        // neutral: "#3d4451",
+                        // "base-100": "#ffffff",
+                    },
+                }, ],
+            },
+        };
+    </script>
+
+
+</head>
+
+<body>
+    <!-- Loader -->
+    <!-- <div id="loader" class="fixed inset-0 flex items-center justify-center bg-white z-50"><div class="relative w-20 h-20"><div class="absolute top-2.5 left-2.5 w-20 h-20 rounded-full shadow-md animate-spin border-t-4 border-orange-500"></div></div></div>-->
+    <!-- Announcement Bar -->
+    <div class="bg-orange-500 py-[14px]">
+        <p class="text-center text-white text-lg md:text-[22px]">আমাদের যে কোন পণ্য অর্ডার করতে কল বা WhatsApp করুন: <a href="tel:+8801321208940" class="underline hover:text-blue-600 ml-1"><i class="fas fa-phone"></i>+8801321208940 </a>|
+            <a href="tel:09642-922922" class="underline hover:text-blue-600 ml-2"><i class="fas fa-phone-alt"></i>হট লাইন: 09642-922922 </a>
+        </p>
+    </div>
+    <!-- Header -->
+    <header class="bg-white">
+        <div class="hidden lg:block container mx-auto relative px-7 py-4">
+            <div class="flex items-center">
+                <!-- Search Button -->
+                <div class="relative w-1/5 flex items-center">
+                    <!-- Search Button -->
+                    <button id="search-drawer-btn" class="flex items-center py-2 px-3 group relative" aria-expanded="false" aria-controls="search-drawer">
+  <svg
+    class="w-5 h-5 text-orange-500 transition-colors"
+    fill="currentColor"
+    stroke="currentColor"
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 512 512"
+  >
+    <path
+      d="M508.5 468.9L387.1 347.5c-2.3-2.3-5.3-3.5-8.5-3.5h-13.2c31.5-36.5 50.6-84 50.6-136C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c52 0 99.5-19.1 136-50.6v13.2c0 3.2 1.3 6.2 3.5 8.5l121.4 121.4c4.7 4.7 12.3 4.7 17 0l22.6-22.6c4.7-4.7 4.7-12.3 0-17zM208 368c-88.4 0-160-71.6-160-160S119.6 48 208 48s160 71.6 160 160-71.6 160-160 160z"
+    ></path>
+  </svg>
+  <div
+    class="absolute z-50 left-1/2 -translate-x-1/2 top-full mt-1 bg-orange-500 text-white text-[16px] rounded px-3 py-2 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap"
+  >
+    Search
+  </div>
+</button>
+
+                    <!-- Overlay -->
+                    <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 hidden z-40 transition-opacity"></div>
+
+                    <!-- Top Drawer -->
+                    <div id="search-drawer" class="fixed top-0 left-0 right-0 z-50 bg-white shadow-md p-10 transform -translate-y-full  transition-transform duration-300" role="dialog" aria-labelledby="drawer-title">
+                        <!-- Header Section -->
+                        <div class="flex hidden justify-between items-center border-b pb-4">
+                            <h3 id="drawer-title" class="text-xl font-semibold text-gray-800">
+                                Search
+                            </h3>
+                            <button id="close-drawer-btn" class="text-gray-500 hover:text-gray-800" aria-label="Close Search Drawer">
+                            ✖
+                        </button>
+                        </div>
+
+
+                        <!-- Wrapper -->
+                        <div class=" mx-auto px-22">
+                            <!-- Header -->
+                            <div class="flex justify-between items-center md:hidden mb-4">
+                                <h3 class="text-lg font-semibold">Search our store</h3>
+                                <button class="text-gray-700 p-2">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 320 512">
+                    <path d="M193.94 256L296.5 153.44l21.15-21.15c3.12-3.12 3.12-8.19 0-11.31l-22.63-22.63c-3.12-3.12-8.19-3.12-11.31 0L160 222.06 36.29 98.34c-3.12-3.12-8.19-3.12-11.31 0L2.34 120.97c-3.12 3.12-3.12 8.19 0 11.31L126.06 256 2.34 379.71c-3.12 3.12-3.12 8.19 0 11.31l22.63 22.63c3.12 3.12 8.19 3.12 11.31 0L160 289.94 262.56 392.5l21.15 21.15c3.12 3.12 8.19 3.12 11.31 0l22.63-22.63c3.12-3.12 3.12-8.19 0-11.31L193.94 256z"></path>
+                </svg>
+            </button>
+                            </div>
+
+                            <!-- Search Bar -->
+                            <div class="flex items-center justify-between space-x-4">
+                                <!-- Logo -->
+                                <div class="w-2/6 flex justify-center">
+                                    <a href="/" title="Ghorer Bazar">
+                                        <img src="https://ghorerbazar.com/cdn/shop/files/logo.webp?v=1707766182" alt="Ghorer Bazar" class="h-20 w-auto" />
+                                    </a>
+                                </div>
+
+                                <!-- Search Input -->
+                                <div class="w-3/6">
+                                    <form id="m-form-search" action="/search" method="GET" role="search" class="relative flex items-center border border-gray-300 rounded-md overflow-hidden">
+                                        <input type="hidden" name="options[unavailable_products]" value="last" />
+                                        <input type="hidden" name="options[prefix]" value="last" />
+                                        <input type="hidden" name="options[fields]" value="title,vendor,product_type,variants.title" />
+                                        <input type="search" name="q" placeholder="Search products" aria-label="Search products" class="w-full px-4 py-4 focus:outline-none border border-black border-2 rounded" />
+                                        <button type="submit" class="absolute top-1/2 -translate-y-1/2 right-2">
+                        <svg class="w-6 h-6 text-gray-500" fill="currentColor" viewBox="0 0 512 512">
+                            <path d="M508.5 468.9L387.1 347.5c-2.3-2.3-5.3-3.5-8.5-3.5h-13.2c31.5-36.5 50.6-84 50.6-136C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c52 0 99.5-19.1 136-50.6v13.2c0 3.2 1.3 6.2 3.5 8.5l121.4 121.4c4.7 4.7 12.3 4.7 17 0l22.6-22.6c4.7-4.7 4.7-12.3 0-17zM208 368c-88.4 0-160-71.6-160-160S119.6 48 208 48s160 71.6 160 160-71.6 160-160 160z"></path>
+                        </svg>
+                    </button>
+                                    </form>
+                                </div>
+
+                                <!-- Account and Cart Icons -->
+                                <div class="w-2/6 flex justify-center space-x-7">
+
+                                    <div class="relative group">
+                                        <!-- Account Icon -->
+                                        <a href="/account" class="flex items-center justify-center w-10 h-10 text-gray-600 hover:text-gray-800 transition">
+                                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 448 512">
+                                                <path
+                                                    d="M313.6 304c-28.7 0-42.5 16-89.6 16-47.1 0-60.8-16-89.6-16C60.2 304 0 364.2 0 438.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-25.6c0-74.2-60.2-134.4-134.4-134.4zM400 464H48v-25.6c0-47.6 38.8-86.4 86.4-86.4 14.6 0 38.3 16 89.6 16 51.7 0 74.9-16 89.6-16 47.6 0 86.4 38.8 86.4 86.4V464zM224 288c79.5 0 144-64.5 144-144S303.5 0 224 0 80 64.5 80 144s64.5 144 144 144zm0-240c52.9 0 96 43.1 96 96s-43.1 96-96 96-96-43.1-96-96 43.1-96 96-96z"
+                                                ></path>
+                                            </svg>
+                                        </a>
+
+                                        <!-- Tooltip -->
+                                        <div class="absolute left-1/2 -translate-x-1/2 top-full mt-1 px-3 py-2 bg-orange-500 text-white text-[16px] opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+                                            Account
+                                        </div>
+                                    </div>
+
+
+                                    <div class="relative group">
+                                        <!-- Cart Icon -->
+                                        <a href="/cart" class="flex items-center justify-center w-10 h-10 text-gray-600 hover:text-gray-800 transition relative">
+                                            <svg class="w-6 h-6 relative" fill="currentColor" viewBox="0 0 448 512">
+                                                <path
+                                                    d="M352 128C352 57.42 294.579 0 224 0 153.42 0 96 57.42 96 128H0v304c0 44.183 35.817 80 80 80h288c44.183 0 80-35.817 80-80V128h-96zM224 48c44.112 0 80 35.888 80 80H144c0-44.112 35.888-80 80-80zm176 384c0 17.645-14.355 32-32 32H80c-17.645 0-32-14.355-32-32V176h48v40c0 13.255 10.745 24 24 24s24-10.745 24-24v-40h160v40c0 13.255 10.745 24 24 24s24-10.745 24-24v-40h48v256z"
+                                                ></path>
+                                            </svg>
+
+                                            <!-- Cart Badge -->
+                                            <span class="absolute -top-1 -right-[1px] bg-orange-500 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">0</span>
+                                        </a>
+
+                                        <!-- Tooltip -->
+                                        <div class="absolute left-1/2 -translate-x-1/2 top-full mt-1 px-3 py-2 bg-orange-500 text-white text-[16px]  opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+                                            Cart
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <!-- Popular Searches -->
+                            <div class="flex justify-center mt-4 space-x-4">
+                                <span class="text-gray-600 text-[23px]">Popular Searches:</span>
+                                <a href="/search?q=Organic+Oil" class="text-black text-[23px] underline">Organic Oil</a>
+                                <a href="/search?q=Honey" class="text-black text-[23px] underline">Honey</a>
+                                <a href="/search?q=Nuts+&+Seeds" class="text-black text-[23px] underline">Nuts & Seeds</a>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+
+                </div>
+
+                <script>
+                    // Elements
+                    const searchDrawerBtn = document.getElementById("search-drawer-btn");
+                    const searchDrawer = document.getElementById("search-drawer");
+                    const closeDrawerBtn = document.getElementById("close-drawer-btn");
+                    const overlay = document.getElementById("overlay");
+
+                    // Toggle Drawer Visibility
+                    const toggleDrawer = () => {
+                        const isHidden = searchDrawer.classList.contains("translate-y-full");
+                        searchDrawer.classList.toggle("translate-y-0");
+                        overlay.classList.toggle("hidden");
+                        searchDrawerBtn.setAttribute("aria-expanded", !isHidden);
+                    };
+
+                    // Event Listeners
+                    searchDrawerBtn.addEventListener("click", toggleDrawer);
+                    closeDrawerBtn.addEventListener("click", toggleDrawer);
+                    overlay.addEventListener("click", toggleDrawer);
+
+                    // Close on Escape Key
+                    document.addEventListener("keydown", (event) => {
+                        if (event.key === "Escape" && !searchDrawer.classList.contains("translate-y-full")) {
+                            toggleDrawer();
+                        }
+                    });
+                </script>
+
+
+                <!-- Logo -->
+                <h1 class="w-3/5 flex justify-center">
+                    <a href="/" class="block"><img class="h-12 md:h-16 object-contain transition-transform duration-300 hover:scale-105" src="https://ghorerbazar.com/cdn/shop/files/logo.webp?v=1707766182" alt="Ghorer Bazar" /></a>
+                </h1>
+                <!-- Cart Button -->
+                <div class="w-1/5 flex justify-end items-center">
+                    <a href="/cart" class="relative py-2 px-2 flex items-center text-orange-500  group" id="m-cart-icon-bubble" role="button" aria-haspopup="dialog">
+                        <!-- Cart Icon --><svg class="w-5 h-5" fill="currentColor" stroke="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M352 128C352 57.42 294.579 0 224 0 153.42 0 96 57.42 96 128H0v304c0 44.183 35.817 80 80 80h288c44.183 0 80-35.817 80-80V128h-96zM224 48c44.112 0 80 35.888 80 80H144c0-44.112 35.888-80 80-80zm176 384c0 17.645-14.355 32-32 32H80c-17.645 0-32-14.355-32-32V176h48v40c0 13.255 10.745 24 24 24s24-10.745 24-24v-40h160v40c0 13.255 10.745 24 24 24s24-10.745 24-24v-40h48v256z"></path></svg>
+                        <!-- Tooltip -->
+                        <div class="absolute left-1/2 -translate-x-1/2 top-full mt-1 bg-orange-500 text-white text-[16px] rounded px-3 py-2 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">Cart </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Header -->
+        <div class="lg:hidden flex items-center justify-between px-4 py-3 ">
+            <!-- Menu Button --><button id="mobile-menu-button" class="text-gray-500"><svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" /></svg></button>
+            <!-- Logo -->
+            <a href="/" class=" flex-shrink-0 "><img class="h-8" src="https://ghorerbazar.com/cdn/shop/files/logo.webp?v=1707766182&width=500" alt="Ghorer Bazar"></a>
+            <!-- Cart Icon --><a href="/cart" class="relative text-gray-500"><svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l1.38-4.66A1 1 0 0017.5 7H6.56L5.28 3M7 13l-2 9m10-9l2 9m-6 0a1 1 0 102 0m-6 0a1 1 0 102 0" /></svg><span class="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">0</span></div><!-- Desktop Header --><div div class="hidden lg:flex items-center justify-between lg:justify-center  px-8 py-6 bg-[#f3f3f3]"><a href="/" class="hidden flex-shrink-0 "><img class="h-10" src="https://ghorerbazar.com/cdn/shop/files/logo.webp?v=1707766182&width=500" alt="Ghorer Bazar"></a>
+            <!-- Navigation -->
+            <nav class="flex space-x-20 bg-red"><a href="/collections/all" class="text-black text-[20px] font-medium relative group">All Categories <span class="absolute left-0 -bottom-1 w-0 h-[1.5px] bg-black transition-all duration-300 group-hover:w-full"></span></a>
+                <a href="/collections/offer" class="text-black text-[20px] font-medium  relative group">OFFER <span class="absolute left-0 -bottom-1 w-0 h-[1.5px] bg-black transition-all duration-300 group-hover:w-full"></span></a><a href="/collections/local-maghi-sarisha-oil"
+                    class="text-black text-[20px] font-medium relative group">Sarisha Oil <span class="absolute left-0 -bottom-1 w-0 h-[1.5px] bg-black transition-all duration-300 group-hover:w-full"></span></a>
+                <a href="/collections/ghee" class="text-black text-[20px] font-medium relative group">Ghee (ঘি) <span class="absolute left-0 -bottom-1 w-0 h-[1.5px] bg-black transition-all duration-300 group-hover:w-full"></span></a>
+                <a href="/collections/dates" class="text-black text-[20px] font-medium relative group">Dates (খেজুর) <span class="absolute left-0 -bottom-1 w-0 h-[1.5px] bg-black transition-all duration-300 group-hover:w-full"></span></a>
+                <a href="/collections/honey" class="text-black text-[20px] font-medium relative group">Honey <span class="absolute left-0 -bottom-1 w-0 h-[1.5px] bg-black transition-all duration-300 group-hover:w-full"></span></a>
+                <a href="/collections/masala" class="text-black text-[20px] font-medium relative group">Masala <span class="absolute left-0 -bottom-1 w-0 h-[1.5px] bg-black transition-all duration-300 group-hover:w-full"></span></a>
+                <a href="/collections/organic-oil" class="text-black text-[20px] font-medium relative group">Organic Oil <span class="absolute left-0 -bottom-1 w-0 h-[1.5px] bg-black transition-all duration-300 group-hover:w-full"></span></a>
+                <a href="/collections/nuts-amp-seeds" class="text-black text-[20px] font-medium relative group">Nuts & Seeds <span class="absolute left-0 -bottom-1 w-0 h-[1.5px] bg-black transition-all duration-300 group-hover:w-full"></span></a>
+                <a href="/collections/tea-coffee" class="text-black text-[20px] font-medium relative group">Tea/Coffee <span class="absolute left-0 -bottom-1 w-0 h-[1.5px] bg-black transition-all duration-300 group-hover:w-full"></span></a>
+                <a href="/collections/functional-food" class="text-black text-[20px] font-medium relative group">Functional Food <span class="absolute left-0 -bottom-1 w-0 h-[1.5px] bg-black transition-all duration-300 group-hover:w-full"></span></a>
+            </nav>
+
+
+
+
+
+            <!-- Cart Icon -->
+            <a href="/cart" class="hidden relative text-gray-500"><svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l1.38-4.66A1 1 0 0017.5 7H6.56L5.28 3M7 13l-2 9m10-9l2 9m-6 0a1 1 0 102 0m-6 0a1 1 0 102 0" /></svg><span class="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">0</span></a></div>
+    </header>
+
+
+
+
+    <main role="main" id="MainContent">
+
+        <div class="bg-[#fe8838] border-b py-[30px] lg:py-[45px]">
+            <div class="container mx-auto px-4 flex justify-center flex-col gap-2 lg:gap-4">
+                <h1 class="text-[2rem] md:text-[4rem] font-normal text-center text-white">রিফান্ড পলিসি</h1>
+                <div class="flex justify-center items-center mt-4">
+                    <nav class=" flex items-center text-gray-600 text-sm space-x-3" role="navigation" aria-label="breadcrumbs">
+                        <a href="/" class="text-white text-[16px] lg:text-[20px] hover:text-gray-400">Home</a>
+                        <span>
+                <svg
+                  class="w-4 h-4 text-white"
+                  fill="currentColor"
+                  stroke="currentColor"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 256 512"
+                >
+                  <path
+                    d="M17.525 36.465l-7.071 7.07c-4.686 4.686-4.686 12.284 0 16.971L205.947 256 10.454 451.494c-4.686 4.686-4.686 12.284 0 16.971l7.071 7.07c4.686 4.686 12.284 4.686 16.97 0l211.051-211.05c4.686-4.686 4.686-12.284 0-16.971L34.495 36.465c-4.686-4.687-12.284-4.687-16.97 0z"
+                  ></path>
+                </svg>
+              </span>
+                        <span class="text-white text-[16px] lg:text-[20px]">রিফান্ড পলিসি</span>
+                    </nav>
+                </div>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 pb-6">
+            <div class="">
+                <!-- Table Header -->
+                <div class="flex items-center justify-between border-b pb-4 text-gray-700 font-semibold py-5">
+                    <div class="w-2/5 text-lg">Product</div>
+                    <div class="w-1/5 text-lg text-center hidden lg:block">Price</div>
+                    <div class="w-1/5 text-lg hidden lg:block text-center">Quantity</div>
+                    <div class="w-1/5 text-lg text-right ">Total</div>
+                </div>
+
+                <!-- Product Row -->
+                <div class="flex items-center justify-between py-7 border-b" id="product-row">
+
+                    <div class="w-3/5 lg:w-2/5  flex ">
+
+                        <img src="https://ghorerbazar.com/cdn/shop/products/honey-nuts-441x441-1.png?v=1713175764&width=165" alt="Honey Nuts" class="w-10 lg:w-[120px] h-full object-cover rounded-md mr-4" />
+                        <div>
+                            <p class="text-gray-700 text-medime lg:text-xl font-medium">Honey Nuts/হানিনাট (৮০০ গ্রাম)</p>
+                            <a href="#" class="text-black text-sm underline" onclick="removeProduct('product-row')">
+                  Remove
+                </a>
+                        </div>
+                    </div>
+                    <div class="w-1/5 text-center text-xl text-gray-700 hidden lg:block">Tk 1,500.00</div>
+                    <div class="w-1/5 text-center hidden lg:block">
+                        <div class="inline-flex border items-center px-[1px] border-orange-600 rounded-md">
+                            <button class="px-4 py-1 text-2xl font-bold " onclick="updateQuantity(-1, 1500)">
+                  -
+                </button>
+                            <input type="text" id="quantity" value="3" class="w-12 text-center text-lg font-semibold border-0 focus:outline-none" readonly />
+                            <button class="px-4 py-1 text-2xl font-bold " onclick="updateQuantity(1, 1500)">
+                  +
+                </button>
+                        </div>
+                    </div>
+
+                    <div class="w-2/5 lg:w-1/5 text-right  flex flex-col gap-1 text-xl text-gray-700">
+                        <div class="text-right  text-xl text-gray-700" id="total">Tk 4,500.00</div>
+
+
+                        <div class="inline-flex border items-center px-[1px] border-orange-600 rounded-md lg:hidden">
+                            <button class="px-4 py-1 text-2xl font-bold " onclick="updateQuantity(-1, 1500)">
+                    -
+                  </button>
+                            <input type="text" id="quantity" value="3" class="w-12 text-center text-lg font-semibold border-0 focus:outline-none" readonly />
+                            <button class="px-4 py-1 text-2xl font-bold " onclick="updateQuantity(1, 1500)">
+                    +
+                  </button>
+
+                        </div>
+
+
+
+
+
+
+                    </div>
+
+                </div>
+
+                <!-- Subtotal -->
+                <div class="flex justify-end mt-10">
+
+
+                    <div class="flex flex-col items-center py-4 px-4  max-w-md ">
+                        <!-- Section with Notes and Subtotal -->
+                        <div class="flex flex-col items-center gap-4 w-full ">
+                            <!-- Buttons: Note and Coupon -->
+                            <div class="flex flex-col items-center gap-4 w-full">
+                                <!-- Buttons: Note and Coupon -->
+                                <div class="flex items-center justify-between w-full border-b-2 py-4">
+                                    <!-- Note Section -->
+                                    <div class="relative group m-auto text-center">
+                                        <svg class="w-[20px] h-[20px] mx-auto cursor-pointer" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19 19" id="noteButton">
+                                            <path
+                                                fill="currentColor"
+                                                d="M17.3672 2.21875c.4453.44531.668.98437.668 1.61719 0 .60937-.2227 1.13672-.668 1.58203L4.99219 17.793l-4.007815.457H.878906c-.257812 0-.46875-.0938-.632812-.2812-.164063-.1876-.234375-.4102-.210938-.668l.457032-4.0078L12.8672.917969C13.3125.472656 13.8398.25 14.4492.25c.6328 0 1.1719.222656 1.6172.667969l1.3008 1.300781zM4.46484 16.7383l9.28126-9.28127-2.918-2.91797-9.28122 9.28124-.35157 3.2695 3.26953-.3515zM16.5938 4.60938c.2109-.21094.3164-.46875.3164-.77344 0-.32813-.1055-.59766-.3164-.8086l-1.336-1.33593c-.2109-.21094-.4805-.31641-.8086-.31641-.3047 0-.5625.10547-.7734.31641l-2.0391 2.03906 2.918 2.91797 2.0391-2.03906z"
+                                            ></path>
+                                        </svg>
+                                        <button class="px-4 py-2 m-auto text-gray-700 font-medium">Note</button>
+
+                                        <!-- Tooltip -->
+                                        <div class="absolute bottom-full left-1/2 transform -translate-x-1/2 -translate-y-2 w-max bg-orange-500 text-white text-sm font-semibold px-4 py-3 rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                                            Add a note to your order
+                                        </div>
+                                    </div>
+
+
+                                    <!-- Coupon Section -->
+                                    <div class="relative group m-auto text-center">
+                                        <svg class="w-[22px] h-[22px] mx-auto cursor-pointer" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 21 14" id="couponButton">
+                                            <path
+                                                fill="currentColor"
+                                                d="M15.2812 3.875c.2344 0 .4336.08203.5977.24609.1641.16407.2461.36328.2461.59766v5.0625c0 .23435-.082.43355-.2461.59765-.1641.1641-.3633.2461-.5977.2461H5.71875c-.23437 0-.43359-.082-.59766-.2461-.16406-.1641-.24609-.3633-.24609-.59765v-5.0625c0-.23438.08203-.43359.24609-.59766.16407-.16406.36329-.24609.59766-.24609h9.56245zM15 9.5V5H6v4.5h9zm4.5-3.375c-.3047 0-.5742.11719-.8086.35156-.2109.21094-.3164.46875-.3164.77344s.1055.57422.3164.80859c.2344.21094.5039.31641.8086.31641h1.125v3.9375c0 .4687-.1641.8672-.4922 1.1953-.3281.3281-.7266.4922-1.1953.4922H2.0625c-.46875 0-.86719-.1641-1.195312-.4922C.539062 13.1797.375 12.7812.375 12.3125V8.375H1.5c.30469 0 .5625-.10547.77344-.31641.23437-.23437.35156-.5039.35156-.80859s-.11719-.5625-.35156-.77344C2.0625 6.24219 1.80469 6.125 1.5 6.125H.375V2.1875c0-.46875.164062-.86719.492188-1.195312C1.19531.664063 1.59375.5 2.0625.5h16.875c.4687 0 .8672.164063 1.1953.492188.3281.328122.4922.726562.4922 1.195312V6.125H19.5zm0 3.375c-.6094 0-1.1367-.22266-1.582-.66797-.4453-.44531-.668-.97265-.668-1.58203s.2227-1.13672.668-1.58203C18.3633 5.22266 18.8906 5 19.5 5V2.1875c0-.16406-.0586-.29297-.1758-.38672-.0937-.11719-.2226-.17578-.3867-.17578H2.0625c-.16406 0-.30469.05859-.42188.17578-.09374.09375-.14062.22266-.14062.38672V5c.60938 0 1.13672.22266 1.58203.66797.44531.44531.66797.97265.66797 1.58203s-.22266 1.13672-.66797 1.58203C2.63672 9.27734 2.10938 9.5 1.5 9.5v2.8125c0 .1641.04688.3047.14062.4219.11719.0937.25782.1406.42188.1406h16.875c.1641 0 .293-.0469.3867-.1406.1172-.1172.1758-.2578.1758-.4219V9.5z"
+                                            ></path>
+                                        </svg>
+                                        <button class="px-4 py-2 m-auto text-gray-700 font-medium">Coupon</button>
+
+                                        <!-- Tooltip -->
+                                        <div class="absolute bottom-full left-1/2 transform -translate-x-1/2 -translate-y-2 w-max bg-orange-500 text-white text-sm font-semibold px-4 py-3 rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                                            Apply your coupon here
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <!-- Forms -->
+                                <div id="noteForm" class="w-full mt-4 hidden">
+                                    <label class="block mb-2 text-sm font-medium text-gray-700">Add note for seller</label>
+                                    <textarea id="noteInput" class="w-full px-3 py-2 text-gray-700 border rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500" placeholder="Special instructions for seller"></textarea>
+                                    <button id="saveNote" class="mt-2 w-full px-4 py-2 bg-orange-500 text-white rounded-md hover:bg-orange-600">
+                                        Save
+                                    </button>
+                                    <button id="cancelNote" class="mt-2 w-full px-4 py-2 bg-gray-300 text-gray-700 rounded-md hover:bg-gray-400">
+                                        Cancel
+                                    </button>
+                                </div>
+
+                                <div id="couponForm" class="w-full mt-4 hidden">
+                                    <label class="block mb-2 text-sm font-medium text-gray-700">Enter discount code</label>
+                                    <input id="couponInput" type="text" class="w-full px-3 py-2 text-gray-700 border rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500" placeholder="Enter discount code here" />
+                                    <button id="applyCoupon" class="mt-2 w-full px-4 py-2 bg-orange-500 text-white rounded-md hover:bg-orange-600">
+                                        Apply
+                                    </button>
+                                    <button id="cancelCoupon" class="mt-2 w-full px-4 py-2 bg-gray-300 text-gray-700 rounded-md hover:bg-gray-400">
+                                        Cancel
+                                    </button>
+                                </div>
+
+                                <div>
+                                    <div class="text-center w-full flex flex-row justify-between mb-4" id="button1">
+                                        <p class="text-lg font-mediam text-gray-700">Subtotal:</p>
+                                        <p class="text-lg font-mediam text-gray-700" id="subtotal"> Tk 4,500.00</p>
+                                    </div>
+
+                                    <p class="text-sm text-left text-gray-500 flex justify-left mb-2" id="button2">Taxes and shipping calculated at checkout</p>
+                                    <div class="w-full mt-6">
+                                        <!-- Button to Open Modal -->
+                                        <button class="w-full px-6 py-4 bg-orange-500 text-white font-semibold rounded-md hover:bg-orange-600 transition-all duration-200 ease-in-out animate-bounce" id="button3">
+ক্যাশ অন ডেলিভারিতে অর্ডার করুন
+</button>
+                                        <style>
+                                            .scrollbar-thin::-webkit-scrollbar {
+                                                width: 8px;
+                                                height: 8px;
+                                            }
+                                            
+                                            .scrollbar-thin::-webkit-scrollbar-thumb {
+                                                background-color: #4b5563;
+                                                /* gray-600 */
+                                                border-radius: 4px;
+                                            }
+                                            
+                                            .scrollbar-thin::-webkit-scrollbar-track {
+                                                background-color: #e5e7eb;
+                                                /* gray-200 */
+                                            }
+                                        </style>
+
+                                        <!-- Modal -->
+                                        <input type="checkbox" id="order-modal" class="modal-toggle" />
+                                        <div class="modal">
+                                            <div class="modal-box relative  rounded-lg shadow-lg  lg:max-w-[37rem] ">
+                                                <label for="order-modal" class=" btn-circle absolute right-2 top-4 flex justify-center items-center   text-gray-700 font-[30px]">✕</label>
+                                                <h2 class="text-center text-xl lg:text-2xl font-bold mb-6 text-gray-800 mt-2">
+                                                    ক্যাশ অন ডেলিভারিতে
+                                                    <br/>অর্ডার করতে আপনার তথ্য দিন </h2>
+
+                                                <!-- Modal Content -->
+                                                <form>
+                                                    <!-- Name Input -->
+                                                    <div class="mb-6 flex flex-col lg:flex-row items-center space-x-4">
+                                                        <!-- Label -->
+                                                        <label for="name" class="block font-semibold text-lg text-gray-700 mb-1 w-[100%] lg:w-[20%]">
+                                                            আপনার নাম *
+                                                        </label>
+
+                                                        <!-- Input with Icon -->
+                                                        <div class="relative w-[100%] lg:w-[80%]">
+                                                            <!-- Input Field -->
+                                                            <input type="text" id="name" placeholder="আপনার নাম" class="block w-full pl-16 py-4 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-orange-500 focus:outline-none transition duration-300 ease-in-out" />
+                                                            <!-- Icon -->
+                                                            <span class="absolute inset-y-0 left-0 flex items-center justify-center text-gray-500 bg-gray-200 px-4 rounded-l-lg">
+                                                                <svg 
+                                                                    xmlns="http://www.w3.org/2000/svg" 
+                                                                    class="w-6 h-full mx-auto" 
+                                                                    fill="none" 
+                                                                    viewBox="0 0 24 24" 
+                                                                    stroke="currentColor"
+                                                                >
+                                                                    <path 
+                                                                        stroke-linecap="round" 
+                                                                        stroke-linejoin="round" 
+                                                                        stroke-width="2"
+                                                                        d="M5.121 17.804A6 6 0 1112 6a6 6 0 01-6.879 11.804zM12 8v4l3 3"
+                                                                    ></path>
+                                                                </svg>
+                                                            </span>
+                                                        </div>
+
+                                                    </div>
+
+
+
+                                                    <!-- Phone Input -->
+
+
+                                                    <div class="mb-6 flex flex-col lg:flex-row items-center space-x-4">
+                                                        <!-- Label -->
+                                                        <label for="name" class="block font-semibold text-lg text-gray-700 mb-1 w-[100%] lg:w-[20%]">
+                                                            ফোন নাম্বার *
+                                                        </label>
+
+                                                        <!-- Input with Icon -->
+                                                        <div class="relative w-[100%] lg:w-[80%]">
+                                                            <!-- Input Field -->
+                                                            <input type="text" id="name" placeholder="ফোন নাম্বার" class="block w-full pl-16 py-4 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-orange-500 focus:outline-none transition duration-300 ease-in-out" />
+                                                            <!-- Icon -->
+                                                            <span class="absolute inset-y-0 left-0 flex items-center text-gray-500 bg-gray-200 px-4 border-r border-gray-300 rounded-l-lg">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                                          d="M3 10l9-7 9 7v8a2 2 0 01-2 2H5a2 2 0 01-2-2v-8z"></path>
+                                                                </svg>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+
+
+
+
+
+
+                                                    <!-- Address Input -->
+                                                    <div class="mb-6 flex flex-col lg:flex-row items-center space-x-4">
+                                                        <!-- Label -->
+                                                        <label for="name" class="block font-semibold text-lg text-gray-700 mb-1 w-[100%] lg:w-[20%]">
+                                                            ফোন নাম্বার *
+                                                        </label>
+
+                                                        <!-- Input with Icon -->
+                                                        <div class="relative w-[100%] lg:w-[80%]">
+                                                            <!-- Input Field -->
+                                                            <input type="text" id="name" placeholder="ফোন নাম্বার " class="block w-full pl-16 py-4 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-orange-500 focus:outline-none transition duration-300 ease-in-out" />
+                                                            <!-- Icon -->
+                                                            <span class="absolute inset-y-0 left-0 flex items-center justify-center text-gray-500 bg-gray-200 px-4 rounded-l-lg">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                                          d="M3 10l9-7 9 7v8a2 2 0 01-2 2H5a2 2 0 01-2-2v-8z"></path>
+                                                                </svg>
+                                                            </span>
+                                                        </div>
+
+                                                    </div>
+
+                                                    <!-- Shipping Methods -->
+                                                    <div class="mb-4">
+                                                        <p class="block text-[20px] font-bold text-gray-700 mb-2">শিপিং মেথড</p>
+                                                        <div class="space-y-0">
+                                                            <label class="flex items-center py-2 px-3 border border-gray-400 rounded-t-lg">
+                                                                <input 
+    type="radio" 
+    name="shipping" 
+    value="dhaka" 
+    class="text-orange-500 focus:ring-orange-500" 
+    style="
+        transform: scale(1.5); /* Makes the radio button larger */
+        accent-color: rgb(151, 146, 146); /* Sets the radio button color */
+    ">
+
+                                                                <div class="ml-3 flex justify-between w-full">
+                                                                    <p class="text-[20px]">ঢাকা সিটির ভিতরে</p>
+                                                                    <p class="text-[20px] font-bold">Tk 70.00</p>
+                                                                </div>
+                                                            </label>
+
+                                                            <label class="flex items-center py-2 px-3 border-y-0 border-gray-400  border border-black">
+                                                                <input 
+    type="radio" 
+    name="shipping" 
+    value="dhaka" 
+    class="text-orange-500 focus:ring-orange-500" 
+    style="
+        transform: scale(1.5); /* Makes the radio button larger */
+        accent-color: black; /* Sets the radio button color */
+    ">
+                                                                <div class="ml-3 flex justify-between w-full">
+                                                                    <p class="text-[20px]">ঢাকা সিটির ভিতরে</p>
+                                                                    <p class="text-[20px] font-bold">Tk 70.00</p>
+                                                                </div>
+                                                            </label>
+                                                            <label class="flex items-center border-gray-400  py-2 px-3 rounded-b-lg  border border-black">
+                                                                <input 
+                                                                type="radio" 
+                                                                name="shipping" 
+                                                                value="dhaka" 
+                                                                class="text-orange-500 focus:ring-orange-500" 
+                                                                style="
+                                                                    transform: scale(1.5); /* Makes the radio button larger */
+                                                                    accent-color: black; /* Sets the radio button color */
+                                                                ">
+                                                               <div class="ml-3 flex justify-between w-full">
+                                                                <p class="text-[20px]">ঢাকা সিটির ভিতরে</p>
+                                                                <p class="text-[20px] font-bold">Tk 70.00</p>
+                                                            </div>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Coupon Code -->
+                                                    <div class="mb-4 flex items-center space-x-2">
+                                                        <!-- Input Field -->
+                                                        <input type="text" placeholder="কুপন কোড" class="block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-orange-500 focus:outline-none focus:border-transparent transition duration-300 ease-in-out">
+
+                                                        <!-- Button -->
+                                                        <button type="button" class="bg-orange-500 text-white py-3 px-5 rounded-md hover:bg-orange-600 shadow-md">
+                                                            এপ্লাই
+                                                        </button>
+                                                    </div>
+
+
+
+
+                                                    <!-- Products List -->
+                                                    <div class="mb-4">
+                                                        <!-- Item 1 -->
+                                                        <div class="flex items-center justify-between border-b py-4">
+                                                            <!-- Quantity and Image -->
+                                                            <!-- Badge for Quantity -->
+                                                            <div class="relative">
+                                                                <img src="https://cdn.shopify.com/s/files/1/0685/1339/9006/products/honey-nuts-441x441-1.png?v=1713175764" alt="Product Image" class="w-12 h-12 rounded">
+                                                                <!-- Badge -->
+                                                                <span class="absolute -top-1 -right-1 flex items-center justify-center w-5 h-5 bg-orange-500 text-white text-xs font-bold rounded-full shadow-md">
+            3
+        </span>
+                                                            </div>
+                                                            <!-- Product Details -->
+                                                            <div class="flex-1 px-4">
+                                                                <p class="text-lg font-semibold text-gray-800">Black Seed Honey/কালোজিরা মধু (৫০০ গ্রাম)</p>
+                                                            </div>
+                                                            <!-- Price -->
+                                                            <div class="flex items-center space-x-2">
+                                                                <span class="text-sm font-bold text-gray-800">Tk 2,400.00</span>
+                                                                <button class="text-gray-500 hover:text-red-500 text-2xl">
+                &times;
+            </button>
+                                                            </div>
+                                                        </div>
+
+                                                        <!-- Item 2 -->
+                                                        <div class="flex items-center justify-between py-4">
+                                                            <!-- Quantity and Image -->
+                                                            <!-- Badge for Quantity -->
+                                                            <div class="relative">
+                                                                <img src="https://cdn.shopify.com/s/files/1/0685/1339/9006/products/honey-nuts-441x441-1.png?v=1713175764" alt="Product Image" class="w-12 h-12 rounded">
+                                                                <!-- Badge -->
+                                                                <span class="absolute -top-1 -right-1 flex items-center justify-center w-5 h-5 bg-orange-500 text-white text-xs font-bold rounded-full shadow-md">
+            3
+        </span>
+                                                            </div>
+                                                            <!-- Product Details -->
+                                                            <div class="flex-1 pl-4">
+                                                                <p class="text-lg font-semibold text-gray-800">HoneyNuts/হানিনাট (৮০০ গ্রাম)</p>
+                                                            </div>
+                                                            <!-- Price -->
+                                                            <div class="flex items-center space-x-2">
+                                                                <span class="text-sm font-bold text-gray-800">Tk 1,500.00</span>
+                                                                <button class="text-gray-500 hover:text-red-500 text-2xl">
+                                                                    &times;
+                                                                </button>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Summary -->
+                                                    <div class="mb-4 border-t px-4 pt-4 bg-[#ebebeb]">
+                                                        <!-- Subtotal -->
+                                                        <div class="flex justify-between items-center py-2">
+                                                            <span class="text-base font-medium text-gray-700">সাব টোটাল</span>
+                                                            <span class="text-base font-bold text-black">Tk 3,900.00</span>
+                                                        </div>
+
+                                                        <!-- Delivery Charge -->
+                                                        <div class="flex justify-between items-center  py-2 border-b-2 border-gray-500">
+                                                            <span class="text-base font-medium text-gray-700">ডেলিভারি চার্জ</span>
+                                                            <span class="text-base font-bold text-black">Tk 70.00</span>
+                                                        </div>
+
+                                                        <!-- Total -->
+                                                        <div class="flex justify-between items-center  py-3 font-semibold">
+                                                            <span class="text-lg text-gray-800">সর্বমোট</span>
+                                                            <span class="text-lg text-gray-800 font-bold">Tk 3,970.00</span>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <!-- Order Note -->
+                                                    <div class="mb-6 flex flex-col lg:flex-row items-center space-x-4">
+                                                        <!-- Label -->
+                                                        <label for="name" class="block font-semibold text-lg text-gray-700 mb-1 w-[100%] lg:w-[20%]">
+                                                            Order Note
+                                                        </label>
+
+                                                        <!-- Input with Icon -->
+                                                        <div class="relative w-[100%] lg:w-[80%]">
+                                                            <!-- Input Field -->
+                                                            <input type="text" id="name" placeholder="ফোন নাম্বার" class="block w-full px-3 py-4 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-orange-500 focus:outline-none transition duration-300 ease-in-out" />
+                                                            <!-- Icon -->
+
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Confirm Button -->
+                                                    <button class="w-full bg-orange-500 text-white py-3 rounded-md hover:bg-orange-600 shadow-md animate-bounce">
+                                                        আপনার অর্ডার কনফার্ম করতে ক্লিক করুন
+                                                    </button>
+                                                    <p class="text-green-600 text-2xl text-center my-6">
+                                                        উপরের বাটনে ক্লিক করলে আপনার অর্ডারটি সাথে সাথে কনফার্ম হয়ে যাবে!
+                                                    </p>
+                                                </form>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <!-- Checkout Button -->
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <script>
+                document.getElementById("button3").addEventListener("click", () => {
+                    document.getElementById("order-modal").checked = true;
+                });
+                const modalCheckbox = document.getElementById("order-modal");
+                const modalContent = document.getElementById("modal-content");
+
+                // Open Modal
+                document.getElementById("button3").addEventListener("click", () => {
+                    modalCheckbox.checked = true;
+                    modalContent.classList.remove("hidden");
+                });
+
+                // Close Modal
+                modalCheckbox.addEventListener("change", () => {
+                    if (!modalCheckbox.checked) {
+                        modalContent.classList.add("hidden");
+                    }
+                });
+
+                // Allow clicking the ✕ label to toggle the checkbox and close the modal
+                document.querySelector('label[for="order-modal"]').addEventListener("click", () => {
+                    modalCheckbox.checked = false;
+                    modalContent.classList.add("hidden");
+                });
+            </script>
+
+            <script>
+                document.addEventListener("DOMContentLoaded", () => {
+                    // Select the elements
+                    const noteForm = document.getElementById("noteForm");
+                    const couponForm = document.getElementById("couponForm");
+                    const subtotalSection = document.getElementById("button1");
+                    const subtotalSection2 = document.getElementById("button2");
+                    const subtotalSection3 = document.getElementById("button3");
+                    const noteButton = document.getElementById("noteButton");
+                    const couponButton = document.getElementById("couponButton");
+                    const saveNote = document.getElementById("saveNote");
+                    const cancelNote = document.getElementById("cancelNote");
+                    const applyCoupon = document.getElementById("applyCoupon");
+                    const cancelCoupon = document.getElementById("cancelCoupon");
+
+                    // Function to hide all sections
+                    function hideAllSections() {
+                        noteForm.classList.add("hidden");
+                        couponForm.classList.add("hidden");
+                        subtotalSection.classList.add("hidden");
+                        subtotalSection2.classList.add("hidden");
+                        subtotalSection3.classList.add("hidden");
+                    }
+
+                    // Initial state: show subtotal section only
+                    subtotalSection.classList.remove("hidden");
+                    subtotalSection2.classList.remove("hidden");
+                    subtotalSection3.classList.remove("hidden");
+                    noteForm.classList.add("hidden");
+                    couponForm.classList.add("hidden");
+
+                    // Event listeners for the buttons
+                    noteButton.addEventListener("click", () => {
+                        hideAllSections();
+                        noteForm.classList.remove("hidden"); // Show note form
+                    });
+
+                    couponButton.addEventListener("click", () => {
+                        hideAllSections();
+                        couponForm.classList.remove("hidden"); // Show coupon form
+                    });
+
+                    saveNote.addEventListener("click", () => {
+                        const noteInput = document.getElementById("noteInput").value.trim();
+                        if (noteInput !== "") {
+                            alert(`Note saved: ${noteInput}`);
+                            hideAllSections();
+                            subtotalSection.classList.remove("hidden"); // Show subtotal section after saving
+                            subtotalSection2.classList.remove("hidden");
+                            subtotalSection.classList.remove("hidden");
+                        } else {
+                            alert("Please enter a note before saving.");
+                        }
+                    });
+
+                    cancelNote.addEventListener("click", () => {
+                        hideAllSections();
+                        subtotalSection.classList.remove("hidden"); // Show subtotal section after canceling
+                        subtotalSection2.classList.remove("hidden");
+                        subtotalSection3.classList.remove("hidden");
+                    });
+
+                    applyCoupon.addEventListener("click", () => {
+                        const couponInput = document.getElementById("couponInput").value.trim();
+                        if (couponInput !== "") {
+                            alert(`Coupon applied: ${couponInput}`);
+                            hideAllSections();
+                            subtotalSection.classList.remove("hidden"); // Show subtotal section after applying
+                            subtotalSection2.classList.remove("hidden");
+                            subtotalSection3.classList.remove("hidden");
+                        } else {
+                            alert("Please enter a coupon code before applying.");
+                        }
+                    });
+
+                    cancelCoupon.addEventListener("click", () => {
+                        hideAllSections();
+                        subtotalSection.classList.remove("hidden"); // Show subtotal section after canceling
+                        subtotalSection2.classList.remove("hidden");
+                        subtotalSection3.classList.remove("hidden");
+                    });
+                });
+                const noteForm = document.getElementById("noteForm");
+                const couponForm = document.getElementById("couponForm");
+
+                const noteButton = document.getElementById("noteButton");
+                const couponButton = document.getElementById("couponButton");
+
+                const saveNote = document.getElementById("saveNote");
+                const cancelNote = document.getElementById("cancelNote");
+                const applyCoupon = document.getElementById("applyCoupon");
+                const cancelCoupon = document.getElementById("cancelCoupon");
+
+                noteButton.addEventListener("click", () => {
+                    noteForm.classList.remove("hidden");
+                    couponForm.classList.add("hidden");
+                });
+
+                couponButton.addEventListener("click", () => {
+                    couponForm.classList.remove("hidden");
+                    noteForm.classList.add("hidden");
+                });
+
+                saveNote.addEventListener("click", () => {
+                    const noteInput = document.getElementById("noteInput").value;
+                    alert(`Note saved: ${noteInput}`);
+                    noteForm.classList.add("hidden");
+                });
+
+                cancelNote.addEventListener("click", () => {
+                    noteForm.classList.add("hidden");
+                });
+
+                applyCoupon.addEventListener("click", () => {
+                    const couponInput = document.getElementById("couponInput").value;
+                    alert(`Coupon applied: ${couponInput}`);
+                    couponForm.classList.add("hidden");
+                });
+
+                cancelCoupon.addEventListener("click", () => {
+                    couponForm.classList.add("hidden");
+                });
+            </script>
+            <script>
+                // Initial quantity and price
+                let quantity = 3;
+                const unitPrice = 1500;
+
+                // Function to update quantity
+                function updateQuantity(change, price) {
+                    quantity += change;
+                    if (quantity < 1) {
+                        quantity = 1; // Ensure quantity is at least 1
+                    }
+
+                    // Update UI
+                    document.getElementById("quantity").value = quantity;
+                    const total = quantity * price;
+
+                    document.getElementById("total").textContent = `Tk ${total.toLocaleString()}.00`;
+                    document.getElementById("subtotal").textContent = `Subtotal: Tk ${total.toLocaleString()}.00`;
+                }
+
+                // Function to remove product row
+                function removeProduct(rowId) {
+                    const productRow = document.getElementById(rowId);
+                    if (productRow) {
+                        productRow.remove();
+
+                        // Reset subtotal to 0 after removal
+                        document.getElementById("subtotal").textContent = "Subtotal: Tk 0.00";
+                    }
+                }
+            </script>
+
+
+
+
+    </main>
+    <!-- BEGIN sections: footer-group -->
+    <footer class=" text-gray-800 pt-8 mt-[100px]">
+        <div>
+            <!-- Footer Top -->
+            <div class="">
+                <div class=" flex flex-wrap lg:flex-nowrap justify-between items-start md:gap-8 px-4 ">
+                    <!-- Logo and Description -->
+                    <div class="w-full xl:w-5/12 space-y-4 text-center lg:text-left"><img src="https://ghorerbazar.com/cdn/shop/files/logo.webp?v=1707766182&width=165" alt="Logo" class="w-[110px] lg:w-40  h-auto">
+                        <h1 class="font-bold text-xl lg:text-2xl  text-left">Ghorer Bazar: Your Trusted Source for Safe & Organic Food </h1>
+                        <p class="text-sm lg:text-[20px] font-[400]  text-justify lg:text-left " style="line-height: 1.3;">Ghorer Bazar is a leading e-commerce platform committed to delivering safe, healthy, and organic food products across Bangladesh. Renowned for its dedication to quality, Ghorer Bazar offers a diverse range of health-focused items,
+                            including premium mustard oil, pure ghee, organic honey, dates, chia seeds, and an assortment of nuts. Each product is carefully sourced and crafted to ensure maximum health benefits, meeting the highest standards of purity
+                            and freshness. </p>
+                    </div>
+                    <!-- Company Links -->
+                    <div class="w-full xl:w-1/4  ">
+                        <!-- Company Section -->
+                        <h3 class="text-xl font-bold mb-8 text-orange-500 hidden lg:block">COMPANY</h3>
+                        <ul class="space-y-2 text-[23px] hidden lg:block">
+                            <li class="group relative"><a href="pages/about-us.html" class="hover:text-orange-500 font-normal relative inline-block">About Us <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-orange-500 transition-all duration-300 group-hover:w-full"></span></a></li>
+                            <li class="relative group"><a href="pages/refund-and-returns-policy.html" class="hover:text-orange-500 font-normal relative inline-block">রিটার্ন পলিসি <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-orange-500 transition-all duration-300 group-hover:w-full"></span></a></li>
+                            <li class="relative group"><a href="pages/রিফান্ড-প্রদান.html" class="hover:text-orange-500 font-normal relative inline-block">রিফান্ড পলিসি <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-orange-500 transition-all duration-300 group-hover:w-full"></span></a></li>
+                        </ul>
+                        <!-- Collapsible Section -->
+                        <div class="collapse collapse-arrow lg:hidden"><input type="checkbox" class="peer text-left" />
+                            <div class="collapse-title text-xl font-medium text-orange-500 text-left">COMPANY </div>
+                            <div class="collapse-content peer-checked:block hidden">
+                                <ul class="space-y-2 text-[20px] -mt-[10px]">
+                                    <li class="group relative"><a href="pages/about-us.html" class="hover:text-orange-500 font-normal relative inline-block">About Us <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-orange-500 transition-all duration-300 group-hover:w-full"></span></a></li>
+                                    <li class="relative group"><a href="pages/refund-and-returns-policy.html" class="hover:text-orange-500 font-normal relative inline-block">রিটার্ন পলিসি <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-orange-500 transition-all duration-300 group-hover:w-full"></span></a></li>
+                                    <li class="relative group"><a href="pages/রিফান্ড-প্রদান.html" class="hover:text-orange-500 font-normal relative inline-block">রিফান্ড পলিসি <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-orange-500 transition-all duration-300 group-hover:w-full"></span></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <style>
+                            .collapse-title {
+                                padding: 0 !important;
+                            }
+                            
+                            .collapse-arrow>.collapse-title:after {
+                                top: 15px;
+                            }
+                            
+                            .collapse:not(.collapse-close)>input[type=checkbox]:checked~.collapse-content {
+                                padding: 0!important;
+                            }
+                            
+                            .collapse:not(.collapse-open):not(.collapse-close)>.collapse-title {
+                                margin-top: 20px !important;
+                            }
+                        </style>
+                    </div>
+                    <!-- Quick Help -->
+                    <div class="w-full xl:w-1/6">
+                        <h3 class="text-xl font-bold mb-8 text-orange-500 hidden lg:block">QUICK HELP</h3>
+                        <ul class="space-y-2 text-[23px] hidden lg:block">
+                            <li class="relative group"><a href="pages/customer-care.html" class="hover:text-orange-500 font-normal relative inline-block">গ্রাহক সেবা <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-orange-500 transition-all duration-300 group-hover:w-full"></span></a></li>
+                            <li class="relative group"><a href="pages/contact.html" class="hover:text-orange-500 font-normal relative inline-block">Contact <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-orange-500 transition-all duration-300 group-hover:w-full"></span></a></li>
+                        </ul>
+
+
+                        <div class="collapse collapse-arrow lg:hidden">
+                            <input type="checkbox" class="peer text-left" />
+                            <div class="collapse-title text-xl font-medium text-orange-500 text-left">
+                                QUICK HELP
+                            </div>
+                            <div class="collapse-content peer-checked:block hidden">
+                                <ul class="space-y-2 text-[20px] mb-[20px] -mt-[10px]">
+                                    <li class="group relative">
+                                        <a href="pages/about-us.html" class="hover:text-orange-500 font-normal relative inline-block">
+                              About Us
+                              <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-orange-500 transition-all duration-300 group-hover:w-full"></span>
+                            </a>
+                                    </li>
+                                    <li class="relative group">
+                                        <a href="pages/refund-and-returns-policy.html" class="hover:text-orange-500 font-normal relative inline-block">
+                              রিটার্ন পলিসি
+                              <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-orange-500 transition-all duration-300 group-hover:w-full"></span>
+                            </a>
+                                    </li>
+                                    <li class="relative group">
+                                        <a href="pages/রিফান্ড-প্রদান.html" class="hover:text-orange-500 font-normal relative inline-block">
+                              রিফান্ড পলিসি
+                              <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-orange-500 transition-all duration-300 group-hover:w-full"></span>
+                            </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Additional Information -->
+                    <div class="w-full xl:w-1/4">
+                        <h3 class="text-xl font-bold  ">DBID ID: 437361334</h3>
+                    </div>
+                </div>
+            </div>
+            <!-- Footer Bottom -->
+            <div class="mt-8 flex flex-col md:flex-row items-center justify-between
+      py-7 bg-orange-500">
+                <!-- Social Media Links -->
+                <div class="flex  space-x-4"><a href="https://www.facebook.com/Ghorerbazarbd.comm" target="_blank" class="text-black font-[20px]"><svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path fill="currentColor" d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z" /></svg></a></div>
+                <!-- Center Text -->
+                <p class="text-xl text-center text-white mt-4 md:mt-0">© ঘরের বাজার 2024</p>
+            </div>
+        </div>
+
+    </footer>
+    <br class="md:hidden" /><br class="md:hidden" />
+    <div class="flex justify-between items-center bg-white py-4 px-6  fixed bottom-0 w-full z-50 md:hidden">
+        <!-- Home Icon -->
+        <div>
+            <a href="index.html" class="flex justify-center">
+                <svg class="w-8 h-8 text-gray-800" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 22 17">
+        <path
+          fill="currentColor"
+          d="M20.9141 7.93359c.1406.11719.2109.26953.2109.45703 0 .14063-.0469.25782-.1406.35157l-.3516.42187c-.1172.14063-.2578.21094-.4219.21094-.1406 0-.2578-.04688-.3515-.14062l-.9844-.77344V15c0 .3047-.1172.5625-.3516.7734-.2109.2344-.4687.3516-.7734.3516h-4.5c-.3047 0-.5742-.1172-.8086-.3516-.2109-.2109-.3164-.4687-.3164-.7734v-3.6562h-2.25V15c0 .3047-.11719.5625-.35156.7734-.21094.2344-.46875.3516-.77344.3516h-4.5c-.30469 0-.57422-.1172-.80859-.3516-.21094-.2109-.31641-.4687-.31641-.7734V8.46094l-.94922.77344c-.11719.09374-.24609.14062-.38672.14062-.16406 0-.30468-.07031-.42187-.21094l-.35157-.42187C.921875 8.625.875 8.50781.875 8.39062c0-.1875.070312-.33984.21094-.45703L9.73438.832031C10.1094.527344 10.5312.375 11 .375s.8906.152344 1.2656.457031l8.6485 7.101559zm-3.7266 6.50391V7.05469L11 1.99219l-6.1875 5.0625v7.38281h3.375v-3.6563c0-.3046.10547-.5624.31641-.7734.23437-.23436.5039-.35155.80859-.35155h3.375c.3047 0 .5625.11719.7734.35155.2344.211.3516.4688.3516.7734v3.6563h3.375z">
+        </path>
+      </svg>
+            </a>
+        </div>
+
+        <!-- All Products Icon -->
+        <div>
+            <a href="collections/all.html" class="flex justify-center">
+                <svg class="w-6 h-6 text-gray-800" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+        <path
+          d="M416 32H32A32 32 0 0 0 0 64v384a32 32 0 0 0 32 32h384a32 32 0 0 0 32-32V64a32 32 0 0 0-32-32zm-16 48v152H248V80zm-200 0v152H48V80zM48 432V280h152v152zm200 0V280h152v152z">
+        </path>
+      </svg>
+            </a>
+        </div>
+
+        <!-- Cart Icon -->
+        <div class="relative">
+            <a href="cart.html" class="flex justify-center">
+                <svg class="w-6 h-6 text-gray-800" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+        <path
+          d="M352 128C352 57.42 294.579 0 224 0 153.42 0 96 57.42 96 128H0v304c0 44.183 35.817 80 80 80h288c44.183 0 80-35.817 80-80V128h-96zM224 48c44.112 0 80 35.888 80 80H144c0-44.112 35.888-80 80-80zm176 384c0 17.645-14.355 32-32 32H80c-17.645 0-32-14.355-32-32V176h48v40c0 13.255 10.745 24 24 24s24-10.745 24-24v-40h160v40c0 13.255 10.745 24 24 24s24-10.745 24-24v-40h48v256z">
+        </path>
+      </svg>
+                <span class="absolute -top-1 -right-2 bg-orange-500 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">0</span>
+            </a>
+        </div>
+
+        <!-- Search Icon -->
+        <!-- Search Icon Button -->
+        <div>
+            <button id="search-drawer-btn" class="flex justify-center">
+<svg class="w-6 h-6 text-gray-800" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <path
+    d="M508.5 468.9L387.1 347.5c-2.3-2.3-5.3-3.5-8.5-3.5h-13.2c31.5-36.5 50.6-84 50.6-136C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c52 0 99.5-19.1 136-50.6v13.2c0 3.2 1.3 6.2 3.5 8.5l121.4 121.4c4.7 4.7 12.3 4.7 17 0l22.6-22.6c4.7-4.7 4.7-12.3 0-17zM208 368c-88.4 0-160-71.6-160-160S119.6 48 208 48s160 71.6 160 160-71.6 160-160 160z">
+  </path>
+</svg>
+</button>
+        </div>
+
+
+
+
+
+    </div>
+    <!-- Scroll-to-Top Button --><button id="scroll-to-top-button" class="fixed bottom-[5.5rem] right-4 w-12 h-12 bg-orange-500 text-white rounded-full hidden transition-opacity hover:bg-blue-600 z-[1000000000]"><svg class="w-6 h-6 mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" /></svg></button>
+
+    <!-- Scripts -->
+    <script>
+        // Scroll-to-top button logic
+        const scrollButton = document.getElementById('scroll-to-top-button');
+        window.addEventListener('scroll', () => {
+                if (window.scrollY > 200) {
+                    scrollButton.classList.remove('hidden');
+                } else {
+                    scrollButton.classList.add('hidden');
+                }
+            }
+
+        );
+        scrollButton.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            }
+
+        );
+
+
+
+        // Simulated loader logic
+        window.addEventListener("load", () => {
+                setTimeout(() => {
+                    const loader = document.getElementById("loader");
+                    loader.classList.add("hidden");
+                }, 2000); // 2-second delay for loader
+            }
+
+        );
+    </script>
+</body>
+
+</html>
+
+</html>
